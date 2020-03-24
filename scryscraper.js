@@ -22,3 +22,9 @@ var getHTML = function ( url, callback ) {
 	xhr.send();
 
 };
+
+getHTML( 'https://scryfall.com/@steve/decks/1de810f5-f318-43a7-808d-be16362a2c45', function (response) {
+	var test = document.querySelector( '#test' );
+	var other = response.querySelector( '.deck-list' );
+	test.innerHTML = other.innerHTML;
+});
