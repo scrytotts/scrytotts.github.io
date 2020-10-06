@@ -4,5 +4,7 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 
 if ( urlParams.has('json-data') ) {
-    console.log('success');
+    var data = urlParams.get('json-data');
+    var obj = JSON.parse(data);
+    console.log(obj);
 }
