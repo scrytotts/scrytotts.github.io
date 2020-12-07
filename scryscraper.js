@@ -6,7 +6,7 @@ function convert() {
   
   console.log(input);
   
-  var inputJSON = JSON.parse(input);
+  //var inputJSON = JSON.parse(input);
   
   //console.log(inputJSON);
   
