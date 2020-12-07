@@ -1,9 +1,5 @@
 /* json morpher script */
-var dataBox = document.getElementById('data');
-var data = dataBox.innerText;
-
-var output = "test"
-
-console.log(output);
-
-dataBox.innerText = output;
+function convert() {
+  var textbox = document.getElementById('data');
+  textbox.innerHTML = "TEST"
+}
