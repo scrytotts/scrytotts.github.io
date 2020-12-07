@@ -12,7 +12,7 @@ function convert() {
   
   try {
     if(!isJSON(input)) throw "Not JSON, try again.";
-    console.log("converting json, beep boop!");
+    convertJSON(input);
   }
   catch(e) {
     errorMessage.innerHTML = e;
@@ -33,4 +33,9 @@ function isJSON(str) {
     return false;
   }
   return true;
+}
+
+function convertJSON(str) {
+  var scryJSON = JSON.parse(str);
+  console.log("Parse me daddy!");
 }
