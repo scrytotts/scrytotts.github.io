@@ -7,7 +7,7 @@ function convert() {
   var output = "";
   
   var errorMessage = document.getElementById('errorMessage');
-  var errorMessage.innerHTML = "";
+  errorMessage.innerHTML = "";
   
   try {
     if(!isJSON(input)) throw "Not JSON, try again.";
