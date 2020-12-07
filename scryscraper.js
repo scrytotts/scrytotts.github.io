@@ -1,6 +1,7 @@
 /* json morpher script */
+var dataBox = document.getElementById('data');
+var data = dataBox.innerText;
 
-var data = document.getElementById('data').innerText;
+var output = "test"
 
-console.log("Data: ");
-console.log(data);
+dataBox.innerText = output;
