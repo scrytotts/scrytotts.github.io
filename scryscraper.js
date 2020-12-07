@@ -1,7 +1,7 @@
 /* json morpher script */
 function convert() { 
   var inputBox = document.getElementById('input');
-  var input = inputBox.innerText;
+  var input = inputBox.value;
   console.log("Input: " + input);
   
   var outputBox = document.getElementById('output');
