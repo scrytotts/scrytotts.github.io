@@ -18,6 +18,7 @@ function convert() {
   catch(e) {
     errorMessage.innerHTML = e;
   }
+}
 
 function isJSON(str) {
   try {
