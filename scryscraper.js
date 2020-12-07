@@ -4,9 +4,11 @@ function convert() {
   
   var input = textbox.innerText;
   
+  console.log(input);
+  
   var inputJSON = JSON.parse(input);
   
-  console.log(inputJSON);
+  //console.log(inputJSON);
   
   //textbox.innerHTML = "TEST"
 }
