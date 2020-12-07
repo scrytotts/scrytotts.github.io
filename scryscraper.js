@@ -13,7 +13,7 @@ function convert() {
   try {
     if(!isJSON(input)) throw "Not JSON, try again.";
     output = convertJSON(input);
-    outputBox.innerHTML = output;
+    outputBox.value = output;
   }
   catch(e) {
     errorMessage.innerHTML = e;
@@ -31,9 +31,12 @@ function isJSON(str) {
 }
 
 function convertJSON(str) {
-  var tabletopJSON = "test";
+  var tabletopJSON = "";
   var scryJSON = JSON.parse(str);
-  console.log("Parse me daddy!");
+  
+  var stacks = {ObjectStates: []};
+  
+  tabletopJSON = JSON.stringify(stacks);
   
   return tabletopJSON;
 }
