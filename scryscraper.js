@@ -1,14 +1,35 @@
 /* json morpher script */
 function convert() { 
-  var textbox = document.getElementById('data');
+  var inputBox = document.getElementById('input');
+  var input = inputBox.innerText;
   
-  var input = textbox.innerText;
+  var outputBox = document.getElementById('output');
+  var output = "";
   
-  console.log(input);
+  var errorMessage = document.getElementById('errorMessage');
+  var errorMessage.innerHTML = "";
+  
+  try {
+    if(!isJSON(input)) throw "Not JSON, try again.";
+    console.log("converting json, beep boop!");
+  }
+  catch(e) {
+    errorMessage.innerHTML = e;
+  }
   
   //var inputJSON = JSON.parse(input);
   
   //console.log(inputJSON);
   
   //textbox.innerHTML = "TEST"
+}
+
+function isJSON(str) {
+  try {
+    JSON.parse(str);
+  }
+  catch(e) {
+    return false;
+  }
+  return true;
 }
