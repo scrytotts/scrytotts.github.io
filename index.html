@@ -5,20 +5,30 @@
 </head>
 <body>
 
-<h1>Scryfall to Tabletop Simulator (Work in Progress)</h1>
-  
-<h3>Paste Scryfall json data into Input box, hit Convert, copy Output box text into blank text document and save as a .json</h3>
+<header>
+  <h1>Scryfall to Tabletop Simulator (Work in Progress)</h1>
+  <h3>Paste Scryfall json data into Input box, hit Convert, copy Output box text into blank text document and save as a .json</h3>
+</header>
 
-<label for="input">Input</label>
-<textarea id="input" rows="5" cols="50" required></textarea>
+<section class="left">
+  <label for="input">Input</label>
+  <textarea id="input" rows="5" cols="50" required></textarea>
+</section>
   
-<button onclick="convert()">Convert</button>
+<section class="middle">
+  <button onclick="convert()">Convert</button>
+  <p id="errorMessage"></p>
+</section>
 
-<label for="output">Output</label>
-<textarea id="output" rows="5" cols="50"></textarea>
+<section class="right">
+  <label for="output">Output</label>
+  <textarea id="output" rows="5" cols="50"></textarea>
+</section>
   
-<p id="errorMessage"></p>
-
+<footer>
+  <p>Have fun playing!</p>
+</footer>
+  
 <script type="text/javascript" src="scryscraper.js"></script>
 </body>
 </html>
