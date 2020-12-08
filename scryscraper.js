@@ -62,3 +62,24 @@ function scryStripper(obj, section) {
   }
   return sectionData;
 }
+
+function transformObj(position, flippedUp = false) {
+  var rotDelta = 0;
+  if (flippedUp == true) {
+    rotDelta = 180;
+  }
+  
+  var transform = {
+    posX: position*3,
+    posY: 0,
+    posZ: 0,
+    rotX: 0,
+    rotY: 180 - rotDelta,
+    rotZ: 180,
+    scaleX: 1,
+    scaleY: 1,
+    scaleZ: 1
+  };
+  
+  return transform;
+}
