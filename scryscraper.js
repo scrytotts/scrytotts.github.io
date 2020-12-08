@@ -36,7 +36,13 @@ function convertJSON(str) {
   
   var stacks = {ObjectStates: []};
   
-  stacks.commanders = scryStripper(scryJSON,"commanders");
+  stacks.commanders = scryStripper(scryJSON, "commanders");
+  
+  var nonlands = scryStripper(scryJSON, "nonlands");
+  var lands = scryStripper(scryJSON, "lands");
+  stacks.ninenine = nonlands.concat(lands);
+  
+  stacks.outside = scryStripper(scryJSON, "outside");
   
   tabletopJSON = JSON.stringify(stacks);
   
