@@ -20,15 +20,20 @@ header {
 
 .left {
   grid-area: left;
+  background-color: #ccc;
 }
 
 .middle {
+  display: flex;
   grid-area: middle;
   align-content: center;
+  justify-content: center;
+  background-color: #ddd;
 }
 
 .right {
   grid-area: right;
+  background-color: #ccc;
 }
 
 footer {
