@@ -49,7 +49,7 @@ function scryStripper(obj, section) {
   var cardArray = obj.entries[section]
   
   var i;
-  for (i = 0, i < cardArray.length, i++) {
+  for (i = 0; i < cardArray.length; i++) {
     sectionData[i] = {count: cardArray[i].count, name: cardArray[i].card_digest.name, image: cardArray[i].card_digest.image}
   }
   return sectionData;
