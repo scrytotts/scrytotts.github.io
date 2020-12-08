@@ -36,7 +36,17 @@ function convertJSON(str) {
   
   var stacks = {ObjectStates: []};
   
+  stacks.commanders = scryStripper(scryJSON,"commanders");
+  
   tabletopJSON = JSON.stringify(stacks);
   
   return tabletopJSON;
+}
+
+function scryStripper(obj, section) {
+  var sectionObj = []
+  
+  console.log(JSON.stringify(obj.entries[section]);
+  
+  return sectionObj
 }
