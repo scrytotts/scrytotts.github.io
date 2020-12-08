@@ -40,28 +40,28 @@ function convertJSON(str) {
   
   var commanders = scryStripper(scryJSON, "commanders");
   if (commanders.length > 1) {
-    stacks[0] = Stack(commanders, 0, true);
+    stacks[0] = stack(commanders, 0, true);
   }
   else if (commanders.length == 1) {
-    stacks[0] = SoloStack(commanders, 0, true);
+    stacks[0] = soloStack(commanders, 0, true);
   }
   
   var nonlands = scryStripper(scryJSON, "nonlands");
   var lands = scryStripper(scryJSON, "lands");
   var ninenine = nonlands.concat(lands);
   if (ninenine.length > 1) {
-    stacks[1] = Stack(ninenine, 1);
+    stacks[1] = stack(ninenine, 1);
   }
   else if (ninenine.length == 1) {
-    stacks[1] = SoloStack(ninenine, 1);
+    stacks[1] = soloStack(ninenine, 1);
   }
   
   var outside = scryStripper(scryJSON, "outside");
   if (outside.length > 1) {
-    stacks[2] = Stack(outside, 2);
+    stacks[2] = stack(outside, 2);
   }
   else if (outside.length == 1) {
-    stacks[2] = SoloStack(outside, 2);
+    stacks[2] = soloStack(outside, 2);
   }
   
   tabletopJSON = JSON.stringify(deck);
@@ -102,7 +102,7 @@ function transformObj(position = 0, flippedUp = false) {
   return transform;
 }
 
-function ContainedObjects(cardArray) {
+function containedObjects(cardArray) {
   var containedObjs = [];
   var i;
   for(i=0; i < cardArray.length; i++) {
@@ -112,7 +112,7 @@ function ContainedObjects(cardArray) {
   return containedObjs;
 }
 
-function DeckIDs(cardArray) {
+function deckIDs(cardArray) {
   var IDs = [];
   var i,j;
   for(i=0; i < cardArray.length; i++) {
@@ -123,22 +123,22 @@ function DeckIDs(cardArray) {
   return IDs;
 }
 
-function CustomDeck(cardArray) {
-  var customDeck = {};
+function customDeck(cardArray) {
+  var cstmDeck = {};
   var i;
   for(i=0; i < cardArray.length; i++) {
-    customDeck[i+1] = { FaceURL: cardArray[i].image, BackURL: "https://c1.scryfall.com/file/scryfall-card-backs/large/59/597b79b3-7d77-4261-871a-60dd17403388.jpg?1562196887", NumHeight: 1, NumWidth: 1, BackIsHidden: true }
+    cstmDeck[i+1] = { FaceURL: cardArray[i].image, BackURL: "https://c1.scryfall.com/file/scryfall-card-backs/large/59/597b79b3-7d77-4261-871a-60dd17403388.jpg?1562196887", NumHeight: 1, NumWidth: 1, BackIsHidden: true }
   }
-  return customDeck;
+  return cstmDeck;
 }
   
-function Stack(cardArray, position, flipped = false) {
-  var stack = { Name: "DeckCustom", ContainedObjects: ContainedObjects(cardArray), DeckIDs: DeckIDs(cardArray), CustomDeck: CustomDeck(cardArray), Transform: Transform(position, flipped) };
+function stack(cardArray, position, flipped = false) {
+  var stack = { Name: "DeckCustom", ContainedObjects: containedObjects(cardArray), DeckIDs: deckIDs(cardArray), CustomDeck: customDeck(cardArray), Transform: transformObj(position, flipped) };
   return stack;
 }
 
-function SoloStack(cardArray, position, flipped) {
-  var solostack = { Name: "Card", CardID: 1, CustomDeck: cardArray[0].image, Transform: Transform(position, flipped), Nickname: cardArray[0].name };
+function soloStack(cardArray, position, flipped) {
+  var solostack = { Name: "Card", CardID: 1, CustomDeck: cardArray[0].image, Transform: transformObj(position, flipped), Nickname: cardArray[0].name };
   return solostack;
 }
   
