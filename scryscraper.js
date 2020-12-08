@@ -105,7 +105,7 @@ function transformObj(position = 0, flippedUp = false) {
 function ContainedObjects(cardArray) {
   var containedObjs = [];
   var i;
-  for(i=0; i < cardArray.length; i++;) {
+  for(i=0; i < cardArray.length; i++) {
     var obj = { CardID: i+1, Name: "Card", Nickname: cardArray[i].name, Transform: transformObj() };
     containedObjs[i] = obj;
   }
@@ -115,7 +115,7 @@ function ContainedObjects(cardArray) {
 function DeckIDs(cardArray) {
   var IDs = [];
   var i,j;
-  for(i=0; i < cardArray.length; i++;) {
+  for(i=0; i < cardArray.length; i++) {
     for(j=0; j < cardArray[i].count; j++) {
       IDs[i] = i+1;
     }
