@@ -46,8 +46,11 @@ function convertJSON(str) {
 function scryStripper(obj, section) {
   var sectionData = []
   
-  var card = obj.entries[section][0];
-  sectionData[0] = {count: card.count, name: card.card_digest.name, image: card.card_digest.image}
+  var cardArray = obj.entries[section]
   
+  var i;
+  for (i = 0, i < cardArray.length, i++) {
+    sectionData[i] = {count: cardArray[i].count, name: cardArray[i].card_digest.name, image: cardArray[i].card_digest.image}
+  }
   return sectionData;
 }
