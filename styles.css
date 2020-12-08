@@ -1,5 +1,5 @@
 * {
- box-sizing: border-box; 
+  box-sizing: border-box; 
 }
 
 body {
@@ -9,10 +9,12 @@ body {
 
 header {
   grid-area: header;
+  padding: 20px;
 }
 
 .container {
   display: grid;
+  grid-gap: 10px;
   grid-template-areas: 'header header header header header header header' 'left left left middle right right right' 'footer footer footer footer footer footer footer';
 }
 
@@ -22,6 +24,7 @@ header {
 
 .middle {
   grid-area: middle;
+  align-content: center;
 }
 
 .right {
@@ -30,4 +33,10 @@ header {
 
 footer {
   grid-area: footer;
+  padding: 10px;
+  text-align: center;
+}
+
+textarea {
+  display: block;
 }
