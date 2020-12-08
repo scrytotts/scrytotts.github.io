@@ -97,7 +97,7 @@ function scryStripper(obj, section, dfcOnly = false) {
     var i;
     for (i = 0; i < cardArray.length; i++) {
       var name = cardArray[i].card_digest.name;
-      if (name.includes("//") {
+      if (name.includes("//")) {
         sectionData.push({count: cardArray[i].count, name: cardArray[i].card_digest.name, image: cardArray[i].card_digest.image})
       }
     }
