@@ -117,7 +117,7 @@ function deckIDs(cardArray) {
   var i,j;
   for(i=0; i < cardArray.length; i++) {
     for(j=0; j < cardArray[i].count; j++) {
-      IDs[i] = i+1;
+      IDs.push(i+1);
     }
   }
   return IDs;
