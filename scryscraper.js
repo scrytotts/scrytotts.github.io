@@ -46,7 +46,7 @@ function convertJSON(str) {
 function scryStripper(obj, section) {
   var sectionObj = []
   
-  console.log(JSON.stringify(obj.entries[section]);
+  console.log(JSON.stringify(obj.entries[section]));
   
   return sectionObj
 }
