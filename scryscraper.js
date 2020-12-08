@@ -159,12 +159,14 @@ function customDeck(cardArray, backAllowed = false) {
   var i;
   for(i=0; i < cardArray.length; i++) {
     var back = defaultBack;
+    var hidden = true;
     var name = cardArray[i].name
     if(backAllowed == true && name.includes("//")) {
       var front = cardArray[i].image;
       back = front.replace("front", "back");
+      hidden = false;
     }
-    cstmDeck[i+1] = { FaceURL: cardArray[i].image, BackURL: back, NumHeight: 1, NumWidth: 1, BackIsHidden: true }
+    cstmDeck[i+1] = { FaceURL: cardArray[i].image, BackURL: back, NumHeight: 1, NumWidth: 1, BackIsHidden: hidden }
   }
   return cstmDeck;
 }
