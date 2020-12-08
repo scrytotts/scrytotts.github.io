@@ -10,21 +10,23 @@
   <h3>Paste Scryfall json data into Input box, hit Convert, copy Output box text into blank text document and save as a .json</h3>
 </header>
 
-<section class="left">
-  <label for="input">Input</label>
-  <textarea id="input" rows="5" cols="50" required></textarea>
-</section>
+<div class="container">
+  <section class="left">
+    <label for="input">Input</label>
+    <textarea id="input" rows="5" cols="50" required></textarea>
+  </section>
   
-<section class="middle">
-  <button onclick="convert()">Convert</button>
-  <p id="errorMessage"></p>
-</section>
+  <section class="middle">
+    <button onclick="convert()">Convert</button>
+    <p id="errorMessage"></p>
+  </section>
 
-<section class="right">
-  <label for="output">Output</label>
-  <textarea id="output" rows="5" cols="50"></textarea>
-</section>
-  
+  <section class="right">
+    <label for="output">Output</label>
+    <textarea id="output" rows="5" cols="50"></textarea>
+  </section>
+</div>
+
 <footer>
   <p>Have fun playing!</p>
 </footer>
