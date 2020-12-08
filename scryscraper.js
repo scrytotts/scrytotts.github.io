@@ -2,7 +2,6 @@
 function convert() { 
   var inputBox = document.getElementById('input');
   var input = inputBox.value;
-  //console.log("Input: " + input);
   
   var outputBox = document.getElementById('output');
   var output = "";
@@ -38,30 +37,50 @@ function convertJSON(str) {
   
   var stacks = deck.ObjectStates;
   
+  var position = 0;
+  
   var commanders = scryStripper(scryJSON, "commanders");
   if (commanders.length > 1) {
-    stacks[0] = stack(commanders, 0, true);
+    stacks.push(stack(commanders, position, true, true));
+    position++;
   }
   else if (commanders.length == 1) {
-    stacks[0] = soloStack(commanders, 0, true);
+    stacks.push(soloStack(commanders, position, true, true));
+    position++;
   }
   
   var nonlands = scryStripper(scryJSON, "nonlands");
   var lands = scryStripper(scryJSON, "lands");
   var ninenine = nonlands.concat(lands);
   if (ninenine.length > 1) {
-    stacks[1] = stack(ninenine, 1);
+    stacks.push(stack(ninenine, position));
+    position++;
   }
   else if (ninenine.length == 1) {
-    stacks[1] = soloStack(ninenine, 1);
+    stacks.push(soloStack(ninenine, position));
+    position++;
   }
   
   var outside = scryStripper(scryJSON, "outside");
   if (outside.length > 1) {
-    stacks[2] = stack(outside, 2);
+    stacks.push(stack(outside, position, true, true));
+    position++;
   }
   else if (outside.length == 1) {
-    stacks[2] = soloStack(outside, 2);
+    stacks.push(soloStack(outside, position, true, true));
+    position++;
+  }
+  
+  var dfcNonlands = scryStripper(scryJSON, "nonlands", true);
+  var dfcLands = scryStripper(scryJSON, "lands", true);
+  var dfc = dfcNonlands.concat(dfcLands);
+  if (dfc.length > 1) {
+    stacks.push(stack(dfc, position, true, true));
+    position++;
+  }
+  else if (dfc.length == 1) {
+    stacks.push(soloStack(dfc, position, true, true));
+    position++;
   }
   
   tabletopJSON = JSON.stringify(deck);
@@ -69,14 +88,25 @@ function convertJSON(str) {
   return tabletopJSON;
 }
 
-function scryStripper(obj, section) {
+function scryStripper(obj, section, dfcOnly = false) {
   var sectionData = []
   
   var cardArray = obj.entries[section]
   
-  var i;
-  for (i = 0; i < cardArray.length; i++) {
-    sectionData[i] = {count: cardArray[i].count, name: cardArray[i].card_digest.name, image: cardArray[i].card_digest.image}
+  if (dfcOnly == true) {
+    var i;
+    for (i = 0; i < cardArray.length; i++) {
+      var name = cardArray[i].card_digest.name;
+      if (name.includes("//") {
+        sectionData.push({count: cardArray[i].count, name: cardArray[i].card_digest.name, image: cardArray[i].card_digest.image})
+      }
+    }
+  }
+  else {
+    var i;
+    for (i = 0; i < cardArray.length; i++) {
+      sectionData[i] = {count: cardArray[i].count, name: cardArray[i].card_digest.name, image: cardArray[i].card_digest.image}
+    }
   }
   return sectionData;
 }
@@ -123,22 +153,28 @@ function deckIDs(cardArray) {
   return IDs;
 }
 
-function customDeck(cardArray) {
+function customDeck(cardArray, backAllowed = false) {
   var cstmDeck = {};
+  var defaultBack = "https://c1.scryfall.com/file/scryfall-card-backs/large/59/597b79b3-7d77-4261-871a-60dd17403388.jpg?1562196887";
   var i;
   for(i=0; i < cardArray.length; i++) {
-    cstmDeck[i+1] = { FaceURL: cardArray[i].image, BackURL: "https://c1.scryfall.com/file/scryfall-card-backs/large/59/597b79b3-7d77-4261-871a-60dd17403388.jpg?1562196887", NumHeight: 1, NumWidth: 1, BackIsHidden: true }
+    var back = defaultBack;
+    if(backAllowed == true) {
+      var front = cardArray[i].image;
+      back = front.replace("front", "back");
+    }
+    cstmDeck[i+1] = { FaceURL: cardArray[i].image, BackURL: back, NumHeight: 1, NumWidth: 1, BackIsHidden: true }
   }
   return cstmDeck;
 }
   
-function stack(cardArray, position, flipped = false) {
-  var stack = { Name: "DeckCustom", ContainedObjects: containedObjects(cardArray), DeckIDs: deckIDs(cardArray), CustomDeck: customDeck(cardArray), Transform: transformObj(position, flipped) };
+function stack(cardArray, position, backAllowed = false, flipped = false) {
+  var stack = { Name: "DeckCustom", ContainedObjects: containedObjects(cardArray), DeckIDs: deckIDs(cardArray), CustomDeck: customDeck(cardArray, backAllowed), Transform: transformObj(position, flipped) };
   return stack;
 }
 
-function soloStack(cardArray, position, flipped) {
-  var solostack = { Name: "Card", CardID: 1, CustomDeck: cardArray[0].image, Transform: transformObj(position, flipped), Nickname: cardArray[0].name };
+function soloStack(cardArray, position, backAllowed = false, flipped = false) {
+  var solostack = { Name: "Card", CardID: 1, CustomDeck: customDeck(cardArray, backAllowed), Transform: transformObj(position, flipped), Nickname: cardArray[0].name };
   return solostack;
 }
   
