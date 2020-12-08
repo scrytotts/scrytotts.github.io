@@ -38,13 +38,31 @@ function convertJSON(str) {
   
   var stacks = deck.ObjectStates;
   
-  stacks[0] = scryStripper(scryJSON, "commanders");
+  var commanders = scryStripper(scryJSON, "commanders");
+  if (commanders.length > 1) {
+    stacks[0] = Stack(commanders, 0, true);
+  }
+  else if (commanders.length == 1) {
+    stacks[0] = SoloStack(commanders, 0, true);
+  }
   
   var nonlands = scryStripper(scryJSON, "nonlands");
   var lands = scryStripper(scryJSON, "lands");
-  stacks[1] = nonlands.concat(lands);
+  var ninenine = nonlands.concat(lands);
+  if (ninenine.length > 1) {
+    stacks[1] = Stack(ninenine, 1);
+  }
+  else if (ninenine.length == 1) {
+    stacks[1] = SoloStack(ninenine, 1);
+  }
   
-  stacks[2] = scryStripper(scryJSON, "outside");
+  var outside = scryStripper(scryJSON, "outside");
+  if (outside.length > 1) {
+    stacks[2] = Stack(outside, 2);
+  }
+  else if (outside.length == 1) {
+    stacks[2] = SoloStack(outside, 2);
+  }
   
   tabletopJSON = JSON.stringify(deck);
   
@@ -88,7 +106,7 @@ function ContainedObjects(cardArray) {
   var containedObjs = [];
   var i;
   for(i=0; i < cardArray.length; i++;) {
-    var obj = { CardID: i+1, Name: "Card", Nickname: cardArray.name, Transform: transformObj(); };
+    var obj = { CardID: i+1, Name: "Card", Nickname: cardArray[i].name, Transform: transformObj() };
     containedObjs[i] = obj;
   }
   return containedObjs;
@@ -101,4 +119,27 @@ function DeckIDs(cardArray) {
     for(j=0; j < cardArray[i].count; j++) {
       IDs[i] = i+1;
     }
+  }
+  return IDs;
 }
+
+function CustomDeck(cardArray) {
+  var customDeck = {};
+  var i;
+  for(i=0; i < cardArray.length; i++) {
+    customDeck[i+1] = { FaceURL: cardArray[i].image, BackURL: "https://c1.scryfall.com/file/scryfall-card-backs/large/59/597b79b3-7d77-4261-871a-60dd17403388.jpg?1562196887", NumHeight: 1, NumWidth: 1, BackIsHidden: true }
+  }
+  return customDeck;
+}
+  
+function Stack(cardArray, position, flipped = false) {
+  var stack = { Name: "DeckCustom", ContainedObjects: ContainedObjects(cardArray), DeckIDs: DeckIDs(cardArray), CustomDeck: CustomDeck(cardArray), Transform: Transform(position, flipped) };
+  return stack;
+}
+
+function SoloStack(cardArray, position, flipped) {
+  var solostack = { Name: "Card", CardID: 1, CustomDeck: cardArray[0].image, Transform: Transform(position, flipped), Nickname: cardArray[0].name };
+  return solostack;
+}
+  
+  
