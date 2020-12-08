@@ -122,8 +122,8 @@ function transformObj(position = 0, flippedUp = false) {
     posY: 0,
     posZ: 0,
     rotX: 0,
-    rotY: 180 - rotDelta,
-    rotZ: 180,
+    rotY: 180,
+    rotZ: 180 - rotDelta,
     scaleX: 1,
     scaleY: 1,
     scaleZ: 1
@@ -136,7 +136,7 @@ function containedObjects(cardArray) {
   var containedObjs = [];
   var i;
   for(i=0; i < cardArray.length; i++) {
-    var obj = { CardID: i+1, Name: "Card", Nickname: cardArray[i].name, Transform: transformObj() };
+    var obj = { CardID: i+1000, Name: "Card", Nickname: cardArray[i].name, Transform: transformObj() };
     containedObjs[i] = obj;
   }
   return containedObjs;
