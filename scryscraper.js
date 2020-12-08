@@ -2,7 +2,7 @@
 function convert() { 
   var inputBox = document.getElementById('input');
   var input = inputBox.value;
-  console.log("Input: " + input);
+  //console.log("Input: " + input);
   
   var outputBox = document.getElementById('output');
   var output = "";
@@ -46,7 +46,7 @@ function convertJSON(str) {
 function scryStripper(obj, section) {
   var sectionObj = []
   
-  console.log(JSON.stringify(obj.entries[section]));
+  console.log(JSON.stringify(obj.entries[section][0].count));
   
   return sectionObj
 }
