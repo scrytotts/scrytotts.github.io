@@ -159,7 +159,8 @@ function customDeck(cardArray, backAllowed = false) {
   var i;
   for(i=0; i < cardArray.length; i++) {
     var back = defaultBack;
-    if(backAllowed == true) {
+    var name = cardArray[i].name
+    if(backAllowed == true && name.includes("//")) {
       var front = cardArray[i].image;
       back = front.replace("front", "back");
     }
