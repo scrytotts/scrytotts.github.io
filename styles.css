@@ -3,6 +3,7 @@
 }
 
 body {
+  margin: 0;
   background-color: powderblue;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -10,6 +11,8 @@ body {
 header {
   grid-area: header;
   padding: 20px;
+  background-color: cadetblue;
+  color: cornsilk;
 }
 
 .container {
@@ -20,7 +23,6 @@ header {
 
 .left {
   grid-area: left;
-  background-color: #ccc;
 }
 
 .middle {
@@ -28,12 +30,10 @@ header {
   grid-area: middle;
   align-items: center;
   justify-content: center;
-  background-color: #ddd;
 }
 
 .right {
   grid-area: right;
-  background-color: #ccc;
 }
 
 footer {
