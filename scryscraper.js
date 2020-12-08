@@ -34,17 +34,19 @@ function convertJSON(str) {
   var tabletopJSON = "";
   var scryJSON = JSON.parse(str);
   
-  var stacks = {ObjectStates: []};
+  var deck = {ObjectStates: []};
   
-  stacks.commanders = scryStripper(scryJSON, "commanders");
+  var stacks = deck.ObjectStates;
+  
+  stacks[0] = scryStripper(scryJSON, "commanders");
   
   var nonlands = scryStripper(scryJSON, "nonlands");
   var lands = scryStripper(scryJSON, "lands");
-  stacks.ninenine = nonlands.concat(lands);
+  stacks[1] = nonlands.concat(lands);
   
-  stacks.outside = scryStripper(scryJSON, "outside");
+  stacks[2] = scryStripper(scryJSON, "outside");
   
-  tabletopJSON = JSON.stringify(stacks);
+  tabletopJSON = JSON.stringify(deck);
   
   return tabletopJSON;
 }
