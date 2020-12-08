@@ -26,7 +26,7 @@ header {
 .middle {
   display: flex;
   grid-area: middle;
-  align-content: center;
+  align-items: center;
   justify-content: center;
   background-color: #ddd;
 }
@@ -45,4 +45,8 @@ footer {
 textarea {
   display: block;
   width: 100%;
+}
+
+button {
+  height: 20px;
 }
