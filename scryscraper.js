@@ -63,7 +63,7 @@ function scryStripper(obj, section) {
   return sectionData;
 }
 
-function transformObj(position, flippedUp = false) {
+function transformObj(position = 0, flippedUp = false) {
   var rotDelta = 0;
   if (flippedUp == true) {
     rotDelta = 180;
@@ -82,4 +82,23 @@ function transformObj(position, flippedUp = false) {
   };
   
   return transform;
+}
+
+function ContainedObjects(cardArray) {
+  var containedObjs = [];
+  var i;
+  for(i=0; i < cardArray.length; i++;) {
+    var obj = { CardID: i+1, Name: "Card", Nickname: cardArray.name, Transform: transformObj(); };
+    containedObjs[i] = obj;
+  }
+  return containedObjs;
+}
+
+function DeckIDs(cardArray) {
+  var IDs = [];
+  var i,j;
+  for(i=0; i < cardArray.length; i++;) {
+    for(j=0; j < cardArray[i].count; j++) {
+      IDs[i] = i+1;
+    }
 }
