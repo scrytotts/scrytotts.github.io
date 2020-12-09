@@ -39,16 +39,6 @@ function convertJSON(str) {
   
   var position = 0;
   
-  var commanders = scryStripper(scryJSON, "commanders");
-  if (commanders.length > 1) {
-    stacks.push(stack(commanders, position, true, true));
-    position++;
-  }
-  else if (commanders.length == 1) {
-    stacks.push(soloStack(commanders, position, true, true));
-    position++;
-  }
-  
   var nonlands = scryStripper(scryJSON, "nonlands");
   var lands = scryStripper(scryJSON, "lands");
   var ninenine = nonlands.concat(lands);
@@ -58,6 +48,16 @@ function convertJSON(str) {
   }
   else if (ninenine.length == 1) {
     stacks.push(soloStack(ninenine, position));
+    position++;
+  }
+  
+  var commanders = scryStripper(scryJSON, "commanders");
+  if (commanders.length > 1) {
+    stacks.push(stack(commanders, position, true, true));
+    position++;
+  }
+  else if (commanders.length == 1) {
+    stacks.push(soloStack(commanders, position, true, true));
     position++;
   }
   
@@ -136,7 +136,7 @@ function containedObjects(cardArray) {
   var containedObjs = [];
   var i;
   for(i=0; i < cardArray.length; i++) {
-    var obj = { CardID: i+1000, Name: "Card", Nickname: cardArray[i].name, Transform: transformObj() };
+    var obj = { CardID: (1+i)*100, Name: "Card", Nickname: cardArray[i].name, Transform: transformObj() };
     containedObjs[i] = obj;
   }
   return containedObjs;
@@ -147,7 +147,7 @@ function deckIDs(cardArray) {
   var i,j;
   for(i=0; i < cardArray.length; i++) {
     for(j=0; j < cardArray[i].count; j++) {
-      IDs.push(i+1000);
+      IDs.push((1+i)*100);
     }
   }
   return IDs;
