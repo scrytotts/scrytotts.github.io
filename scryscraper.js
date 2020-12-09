@@ -177,7 +177,7 @@ function stack(cardArray, position, backAllowed = false, flipped = false) {
 }
 
 function soloStack(cardArray, position, backAllowed = false, flipped = false) {
-  var solostack = { Name: "Card", CardID: 1, CustomDeck: customDeck(cardArray, backAllowed), Transform: transformObj(position, flipped), Nickname: cardArray[0].name };
+  var solostack = { Name: "Card", CardID: 100, CustomDeck: customDeck(cardArray, backAllowed), Transform: transformObj(position, flipped), Nickname: cardArray[0].name };
   return solostack;
 }
   
