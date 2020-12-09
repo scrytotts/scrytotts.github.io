@@ -181,4 +181,16 @@ function soloStack(cardArray, position, backAllowed = false, flipped = false) {
   return solostack;
 }
   
+function downloadToFile() {
+  var content = document.getElementById('content');
+  var filename = "output.json"
+  var contentType = "application/json";
+  var a = document.createElement('a');
+  var file = new Blob([content], {type: contentType});
   
+  a.href = URL.createObjectURL(file);
+  a.download = filename;
+  a.click();
+  
+  URL.revokeObjectURL(a.href);
+}
