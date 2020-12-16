@@ -100,6 +100,7 @@ function scryStripper(obj, section, dfcOnly = false) {
       var name = digest.name;
       if (name.includes("//") && digest != null) {
         sectionData.push({count: cardArray[i].count, name: digest.name, image: digest.image});
+        console.log({count: cardArray[i].count, name: digest.name, image: digest.image}};
       }
       else {
         console.log("Null Double");
@@ -112,6 +113,7 @@ function scryStripper(obj, section, dfcOnly = false) {
       var digest = cardArray[i].card_digest;
       if (digest != null) {
         sectionData.push({count: cardArray[i].count, name: digest.name, image: digest.image});
+        console.log({count: cardArray[i].count, name: digest.name, image: digest.image});
       }
       else {
         console.log("Null");
