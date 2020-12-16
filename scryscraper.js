@@ -151,6 +151,7 @@ function containedObjects(cardArray) {
     for(j=0; j < cardArray[i].count; j++) {
       var obj = { CardID: (1+i)*100, Name: "Card", Nickname: cardArray[i].name, Transform: transformObj() };
       containedObjs.push(obj);
+      console.log("ContainedObjs: " + cardArray[i].name);
     }
   }
   return containedObjs;
@@ -162,6 +163,7 @@ function deckIDs(cardArray) {
   for(i=0; i < cardArray.length; i++) {
     for(j=0; j < cardArray[i].count; j++) {
       IDs.push((1+i)*100);
+      console.log("DeckIDs: " + cardArray[i].count);
     }
   }
   return IDs;
@@ -172,6 +174,7 @@ function customDeck(cardArray, backAllowed = false) {
   var defaultBack = "https://c1.scryfall.com/file/scryfall-card-backs/large/59/597b79b3-7d77-4261-871a-60dd17403388.jpg?1562196887";
   var i;
   for(i=0; i < cardArray.length; i++) {
+    console.log("CustomDeck: " + cardArray[i].name);
     var back = defaultBack;
     var hidden = true;
     var name = cardArray[i].name
