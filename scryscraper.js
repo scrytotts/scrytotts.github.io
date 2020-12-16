@@ -96,16 +96,20 @@ function scryStripper(obj, section, dfcOnly = false) {
   if (dfcOnly == true) {
     var i;
     for (i = 0; i < cardArray.length; i++) {
-      var name = cardArray[i].card_digest.name;
-      if (name.includes("//")) {
-        sectionData.push({count: cardArray[i].count, name: cardArray[i].card_digest.name, image: cardArray[i].card_digest.image})
+      var digest = cardArray[i].card_digest;
+      var name = digest.name;
+      if (name.includes("//") && digest != null) {
+        sectionData.push({count: cardArray[i].count, name: digest.name, image: digest.image})
       }
     }
   }
   else {
     var i;
     for (i = 0; i < cardArray.length; i++) {
-      sectionData[i] = {count: cardArray[i].count, name: cardArray[i].card_digest.name, image: cardArray[i].card_digest.image}
+      var digest = cardArray[i].card_digest;
+      if (digest != null) {
+        sectionData[i] = {count: cardArray[i].count, name: digest.name, image: digest.image}
+      }
     }
   }
   return sectionData;
@@ -136,8 +140,9 @@ function containedObjects(cardArray) {
   var containedObjs = [];
   var i;
   for(i=0; i < cardArray.length; i++) {
-    var obj = { CardID: (1+i)*100, Name: "Card", Nickname: cardArray[i].name, Transform: transformObj() };
-    containedObjs[i] = obj;
+    for(j=0; j < cardArray[i].count; j++) {
+      var obj = { CardID: (1+i)*100, Name: "Card", Nickname: cardArray[i].name, Transform: transformObj() };
+      containedObjs.push(obj);
   }
   return containedObjs;
 }
