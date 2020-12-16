@@ -143,6 +143,7 @@ function containedObjects(cardArray) {
     for(j=0; j < cardArray[i].count; j++) {
       var obj = { CardID: (1+i)*100, Name: "Card", Nickname: cardArray[i].name, Transform: transformObj() };
       containedObjs.push(obj);
+    }
   }
   return containedObjs;
 }
