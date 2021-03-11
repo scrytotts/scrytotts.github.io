@@ -99,7 +99,7 @@ function scryStripper(obj, section, dfcOnly = false) {
       var digest = cardArray[i].card_digest;
       if (digest != null) {
         if (digest['name'].includes("//")) {
-          sectionData.push({count: cardArray[i].count, name: digest.name, image: digest.image});
+          sectionData.push({count: cardArray[i].count, name: digest.name, image: digest.image_uris.front});
         }
       }
     }
@@ -109,7 +109,7 @@ function scryStripper(obj, section, dfcOnly = false) {
     for (i = 0; i < cardArray.length; i++) {
       var digest = cardArray[i].card_digest;
       if (digest != null) {
-        sectionData.push({count: cardArray[i].count, name: digest.name, image: digest.image});
+        sectionData.push({count: cardArray[i].count, name: digest.name, image: digest.image_uris.front});
       }
     }
   }
