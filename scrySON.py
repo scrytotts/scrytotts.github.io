@@ -55,7 +55,8 @@ if args:
 
 	#backPath = 'https://www.frogtown.me/images/gatherer/CardBack.jpg'
 	#backPath = 'https://gamepedia.cursecdn.com/mtgsalvation_gamepedia/f/f8/Magic_card_back.jpg'
-	backPath = 'https://musingsofalifelongnerd.files.wordpress.com/2015/01/mtg-card-back.jpg'
+	#backPath = 'https://musingsofalifelongnerd.files.wordpress.com/2015/01/mtg-card-back.jpg'
+	backPath = 'https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/f/f8/Magic_card_back.jpg'
 
 	#assign first argument(URL) to local variable
 	deckURL = args[0]
