@@ -170,8 +170,7 @@ function deckIDs(cardArray) {
 
 function customDeck(cardArray, backAllowed = false) {
   var cstmDeck = {};
-  //var defaultBack = "https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/f/f8/Magic_card_back.jpg";
-  var defaultBack = "Magic_card_back.jpg";
+  var defaultBack = "https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/f/f8/Magic_card_back.jpg";
   var i;
   for(i=0; i < cardArray.length; i++) {
     var back = defaultBack;
