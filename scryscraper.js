@@ -1,5 +1,8 @@
 /* json morpher script */
-function convert() { 
+
+// takes input json data, converts to tabletop json and outputs
+function convert() {
+  // grab the text boxes
   var inputBox = document.getElementById('input');
   var input = inputBox.value;
   
@@ -9,6 +12,7 @@ function convert() {
   var errorMessage = document.getElementById('errorMessage');
   errorMessage.innerHTML = "";
   
+  // attempt to convert json
   try {
     if(!isJSON(input)) throw "Not JSON, try again.";
     output = convertJSON(input);
@@ -19,6 +23,7 @@ function convert() {
   }
 }
 
+// check if json data
 function isJSON(str) {
   try {
     JSON.parse(str);
@@ -29,6 +34,7 @@ function isJSON(str) {
   return true;
 }
 
+// convert from scry formatted json to tabletop formatted json
 function convertJSON(str) {
   var tabletopJSON = "";
   var scryJSON = JSON.parse(str);
@@ -88,6 +94,7 @@ function convertJSON(str) {
   return tabletopJSON;
 }
 
+// pull necessary info from scryfall data
 function scryStripper(obj, section, dfcOnly = false) {
   var sectionData = []
   
@@ -98,8 +105,8 @@ function scryStripper(obj, section, dfcOnly = false) {
     for (i = 0; i < cardArray.length; i++) {
       var digest = cardArray[i].card_digest;
       if (digest != null) {
-        if (digest['name'].includes("//")) {
-          sectionData.push({count: cardArray[i].count, name: digest.name, image: digest.image_uris.front});
+        if (digest['image_uris'].hasOwnProperty("back")) {
+          sectionData.push({count: cardArray[i].count, name: digest.name, front: digest.image_uris.front, back: digest.image_uris.back});
         }
       }
     }
@@ -109,13 +116,14 @@ function scryStripper(obj, section, dfcOnly = false) {
     for (i = 0; i < cardArray.length; i++) {
       var digest = cardArray[i].card_digest;
       if (digest != null) {
-        sectionData.push({count: cardArray[i].count, name: digest.name, image: digest.image_uris.front});
+        sectionData.push({count: cardArray[i].count, name: digest.name, front: digest.image_uris.front});
       }
     }
   }
   return sectionData;
 }
 
+// give objects a transform object so they can be treated as objects in game
 function transformObj(position = 0, flippedUp = false) {
   var rotDelta = 0;
   if (flippedUp == true) {
@@ -162,15 +170,17 @@ function deckIDs(cardArray) {
 
 function customDeck(cardArray, backAllowed = false) {
   var cstmDeck = {};
-  var defaultBack = "https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/f/f8/Magic_card_back.jpg";
+  //var defaultBack = "https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/f/f8/Magic_card_back.jpg";
+  var defaultBack = "Magic_card_back.jpg";
   var i;
   for(i=0; i < cardArray.length; i++) {
     var back = defaultBack;
     var hidden = true;
-    var name = cardArray[i].name
-    if(backAllowed == true && name.includes("//")) {
-      var front = cardArray[i].image;
-      back = front.replace("front", "back");
+    var card = cardArray[i];
+    var name = card.name;
+    var front = card.front;
+    if(backAllowed == true && card.hasOwnProperty("back")) {
+      back = card.back;
       hidden = false;
     }
     cstmDeck[i+1] = { FaceURL: cardArray[i].image, BackURL: back, NumHeight: 1, NumWidth: 1, BackIsHidden: hidden }
