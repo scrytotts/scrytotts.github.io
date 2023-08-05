@@ -182,7 +182,7 @@ function customDeck(cardArray, backAllowed = false) {
       back = card.back;
       hidden = false;
     }
-    cstmDeck[i+1] = { FaceURL: cardArray[i].image, BackURL: back, NumHeight: 1, NumWidth: 1, BackIsHidden: hidden }
+    cstmDeck[i+1] = { FaceURL: front, BackURL: back, NumHeight: 1, NumWidth: 1, BackIsHidden: hidden }
   }
   return cstmDeck;
 }
